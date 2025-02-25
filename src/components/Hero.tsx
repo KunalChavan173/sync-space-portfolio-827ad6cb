@@ -1,3 +1,4 @@
+
 import { ArrowRight } from "lucide-react";
 import { FadeUp } from "./ui/Motion";
 import HeroBackground from "./3d/HeroBackground";
@@ -10,11 +11,11 @@ const Hero = () => {
       <div className="container px-4 mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeUp>
-            <span className="chip mb-4">Sync Space Media</span>
+            <span className="chip mb-4 bg-primary/20 text-primary-foreground">Sync Space Media</span>
           </FadeUp>
           
           <FadeUp delay={150}>
-            <h1 className="heading-xl mb-6">
+            <h1 className="heading-xl mb-6 text-gradient">
               We craft digital experiences that inspire
             </h1>
           </FadeUp>
@@ -30,15 +31,15 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a 
                 href="#contact" 
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium transition-colors hover:bg-primary/90"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium transition-all duration-300 hover:bg-primary/90 hover:scale-105 hover:shadow-glow"
               >
                 Start a Project
               </a>
               <a 
                 href="#portfolio" 
-                className="px-6 py-3 rounded-lg font-medium inline-flex items-center transition-colors hover:bg-secondary"
+                className="px-6 py-3 rounded-lg font-medium inline-flex items-center transition-all duration-300 hover:bg-secondary hover:scale-105"
               >
-                View Our Work <ArrowRight className="ml-2 h-4 w-4" />
+                View Our Work <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
           </FadeUp>

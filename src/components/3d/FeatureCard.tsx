@@ -42,9 +42,9 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
     <div
       ref={cardRef}
       className={cn(
-        "group p-6 rounded-xl bg-card shadow-lg",
-        "border border-border/30",
-        "hover:border-primary/20",
+        "group p-6 rounded-xl glass-card",
+        "border border-white/10",
+        "hover:border-primary/30",
         "transition-all duration-300 ease-out",
         "perspective-1000"
       )}
@@ -56,19 +56,19 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
       }}
     >
       <div 
-        className="w-12 h-12 bg-secondary/50 rounded-lg flex items-center justify-center mb-5"
+        className="w-12 h-12 bg-secondary/30 rounded-lg flex items-center justify-center mb-5 text-primary transition-transform duration-300 group-hover:scale-110"
         style={{ transform: 'translateZ(20px)' }}
       >
         {icon}
       </div>
       <h3 
-        className="text-xl font-semibold mb-3"
+        className="text-xl font-semibold mb-3 transition-transform duration-300 group-hover:text-primary"
         style={{ transform: 'translateZ(15px)' }}
       >
         {title}
       </h3>
       <p 
-        className="text-muted-foreground"
+        className="text-muted-foreground transition-transform duration-300"
         style={{ transform: 'translateZ(10px)' }}
       >
         {description}
