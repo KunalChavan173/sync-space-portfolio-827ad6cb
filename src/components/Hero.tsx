@@ -1,10 +1,12 @@
-
 import { ArrowRight } from "lucide-react";
 import { FadeUp } from "./ui/Motion";
+import HeroBackground from "./3d/HeroBackground";
 
 const Hero = () => {
   return (
     <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
+      <HeroBackground />
+      
       <div className="container px-4 mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <FadeUp>
@@ -45,8 +47,6 @@ const Hero = () => {
       
       <div className="absolute inset-0 bg-gradient-to-b from-background to-transparent h-32 z-0"></div>
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent h-32 z-0"></div>
-      <div className="absolute -top-[30%] -left-[10%] w-[50%] h-[70%] bg-secondary/20 rounded-full filter blur-3xl opacity-30"></div>
-      <div className="absolute -bottom-[20%] -right-[10%] w-[50%] h-[70%] bg-primary/10 rounded-full filter blur-3xl opacity-30"></div>
     </section>
   );
 };

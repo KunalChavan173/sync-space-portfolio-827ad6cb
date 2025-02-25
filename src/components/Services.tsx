@@ -1,7 +1,7 @@
 
 import { FadeUp } from "./ui/Motion";
 import { ArrowRight, Camera, Globe, Image, Monitor, Video } from "lucide-react";
-import { cn } from "@/lib/utils";
+import FeatureCard from "./3d/FeatureCard";
 
 const services = [
   {
@@ -63,18 +63,11 @@ export default function Services() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <FadeUp key={service.title} delay={400 + index * 100}>
-                <div className={cn(
-                  "group p-6 rounded-xl bg-card shadow-lg",
-                  "border border-border/30",
-                  "hover:border-primary/20",
-                  "transition-all duration-300 ease-out"
-                )}>
-                  <div className="w-12 h-12 bg-secondary/50 rounded-lg flex items-center justify-center mb-5">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground">{service.description}</p>
-                </div>
+                <FeatureCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                />
               </FadeUp>
             ))}
           </div>
