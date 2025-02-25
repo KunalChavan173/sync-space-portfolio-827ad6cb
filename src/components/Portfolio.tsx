@@ -65,19 +65,53 @@ function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <div 
             className={cn(
-              "
+              "transform transition-all duration-500 ease-out",
+              isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            )}
+          >
+            <span className="chip mb-2">{project.category}</span>
+            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+            <p className="text-white/80 mb-4 text-sm line-clamp-2">{project.description}</p>
+            <a 
+              href={project.link} 
+              className="inline-flex items-center text-white hover:text-white/80 text-sm font-medium transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Project <ExternalLink className="ml-1 h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </FadeUp>
+  );
+}
 
-If there's knowledge, context or custom instructions you want to include in every edit in this project, set it below.
+export default function Portfolio() {
+  return (
+    <section id="portfolio" className="py-20 bg-background">
+      <div className="container px-4 mx-auto">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <BlurIn>
+            <h2 className="heading-lg mb-4">Featured Projects</h2>
+            <p className="paragraph text-foreground/70 mb-6">
+              Explore some of our most impactful work across various media disciplines.
+            </p>
+            <a 
+              href="#contact" 
+              className="inline-flex items-center font-medium link-hover"
+            >
+              Discuss your project <ArrowRight className="ml-1 h-4 w-4" />
+            </a>
+          </BlurIn>
+        </div>
 
-<lov-actions>
-<lov-knowledge>
-</lov-actions>
-
-Given your desire for a minimalistic, premium portfolio website similar to byoptimise.com, consider adding a backend to manage content (case studies, team members, etc.) and potentially client logins.  You can use the Supabase menu to connect your project.
-<lov-actions>
-<lov-message-prompt message="Tell me more about Supabase">Learn more about Supabase</lov-message-prompt>
-</lov-actions>
-
-<lov-actions>
-<lov-link url="https://docs.lovable.dev/">Visit docs</lov-link>
-</lov-actions>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {PROJECTS.map((project, index) => (
+            <ProjectCard key={index} project={project} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
