@@ -1,75 +1,54 @@
 
-import { FadeIn, FadeUp } from "./ui/Motion";
-import { ArrowDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { FadeUp } from "./ui/Motion";
 
-export default function Hero() {
+const Hero = () => {
   return (
-    <section 
-      id="home" 
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-16"
-    >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0)_70%)]"></div>
+    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
+      <div className="container px-4 mx-auto relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <FadeUp>
+            <span className="chip mb-4">Sync Space Media</span>
+          </FadeUp>
+          
+          <FadeUp delay={150}>
+            <h1 className="heading-xl mb-6">
+              We craft digital experiences that inspire
+            </h1>
+          </FadeUp>
+          
+          <FadeUp delay={300}>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl mx-auto">
+              A full-service creative agency specializing in brand development, 
+              web design, and digital marketing for ambitious brands.
+            </p>
+          </FadeUp>
+          
+          <FadeUp delay={450}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a 
+                href="#contact" 
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium transition-colors hover:bg-primary/90"
+              >
+                Start a Project
+              </a>
+              <a 
+                href="#portfolio" 
+                className="px-6 py-3 rounded-lg font-medium inline-flex items-center transition-colors hover:bg-secondary"
+              >
+                View Our Work <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </div>
+          </FadeUp>
+        </div>
       </div>
       
-      <div className="container max-w-5xl mx-auto px-6 md:px-12 flex flex-col items-center text-center">
-        <FadeIn className="mb-6">
-          <span className="chip">Digital Media Expertise</span>
-        </FadeIn>
-        
-        <FadeUp delay={200}>
-          <h1 className="heading-xl mb-6">
-            Creating digital experiences that resonate
-          </h1>
-        </FadeUp>
-        
-        <FadeUp delay={400} className="max-w-2xl mx-auto">
-          <p className="paragraph text-muted-foreground mb-10">
-            Sync Space Media is a creative agency that combines strategic thinking with 
-            innovative design to deliver exceptional digital solutions for forward-thinking brands.
-          </p>
-        </FadeUp>
-        
-        <FadeUp delay={600}>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="#work" 
-              className={cn(
-                "px-6 py-3 rounded-md font-medium",
-                "bg-primary text-primary-foreground",
-                "transition-all duration-300",
-                "hover:scale-[1.03] active:scale-[0.97]"
-              )}
-            >
-              View Our Work
-            </a>
-            <a 
-              href="#services" 
-              className={cn(
-                "px-6 py-3 rounded-md font-medium",
-                "bg-secondary text-secondary-foreground",
-                "transition-all duration-300",
-                "hover:scale-[1.03] active:scale-[0.97]"
-              )}
-            >
-              Explore Services
-            </a>
-          </div>
-        </FadeUp>
-      </div>
-      
-      <div className="absolute bottom-12 left-0 right-0 flex justify-center">
-        <FadeIn delay={1000}>
-          <a 
-            href="#services" 
-            className="animate-bounce opacity-50 hover:opacity-100 transition-opacity"
-            aria-label="Scroll down"
-          >
-            <ArrowDown className="w-6 h-6" />
-          </a>
-        </FadeIn>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-transparent h-32 z-0"></div>
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent h-32 z-0"></div>
+      <div className="absolute -top-[30%] -left-[10%] w-[50%] h-[70%] bg-secondary/30 rounded-full filter blur-3xl opacity-50"></div>
+      <div className="absolute -bottom-[20%] -right-[10%] w-[50%] h-[70%] bg-primary/10 rounded-full filter blur-3xl opacity-50"></div>
     </section>
   );
-}
+};
+
+export default Hero;

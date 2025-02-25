@@ -1,5 +1,5 @@
 
-import { FadeUp, StaggeredChildren } from "./ui/Motion";
+import { FadeUp } from "./ui/Motion";
 import { ArrowRight, Camera, Globe, Image, Monitor, Video } from "lucide-react";
 import { cn } from "@/lib/utils";
 

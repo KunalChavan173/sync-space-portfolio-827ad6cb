@@ -4,11 +4,12 @@ import { cn } from "@/lib/utils";
 
 interface MotionProps {
   children: ReactNode;
-  className?: string;
   delay?: number;
+  className?: string;
 }
 
-export function FadeIn({ children, className, delay = 0 }: MotionProps) {
+// Fade Up animation
+export const FadeUp = ({ children, delay = 0, className }: MotionProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -16,203 +17,121 @@ export function FadeIn({ children, className, delay = 0 }: MotionProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
         }
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      observer.disconnect();
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
     };
-  }, []);
+  }, [delay]);
 
   return (
     <div
       ref={ref}
       className={cn(
-        "opacity-0 transition-opacity duration-700 ease-out",
-        isVisible && "opacity-100",
+        "transition-all duration-700 ease-out",
+        isVisible ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-10",
         className
       )}
-      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
     </div>
   );
-}
+};
 
-export function FadeUp({ children, className, delay = 0 }: MotionProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
+// Staggered children animation
+export const StaggeredChildren = ({ children, className }: MotionProps) => {
   return (
-    <div
-      ref={ref}
-      className={cn(
-        "opacity-0 translate-y-8 transition-all duration-700 ease-out",
-        isVisible && "opacity-100 translate-y-0",
-        className
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-}
-
-export function SlideIn({ children, className, delay = 0 }: MotionProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
+    <div className={className}>
+      {React.Children.map(children, (child, index) => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child as React.ReactElement<any>, {
+            style: {
+              animationDelay: `${index * 100}ms`,
+            },
+          });
         }
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "opacity-0 -translate-x-8 transition-all duration-700 ease-out",
-        isVisible && "opacity-100 translate-x-0",
-        className
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
+        return child;
+      })}
     </div>
   );
-}
+};
 
-export function BlurIn({ children, className, delay = 0 }: MotionProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "opacity-0 blur-sm transition-all duration-700 ease-out",
-        isVisible && "opacity-100 blur-none",
-        className
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-}
-
-export function LazyImage({
-  src,
-  alt,
-  className,
-}: {
+// Lazy Image loading with blur effect
+interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
-  className?: string;
-}) {
-  const [loaded, setLoaded] = useState(false);
+}
+
+export const LazyImage = ({ src, alt, className, ...props }: LazyImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   
   return (
     <img
       src={src}
       alt={alt}
       className={cn(
-        "image-loading",
-        loaded && "image-loaded",
+        "transition-all duration-700",
+        isLoaded ? "blur-0" : "blur-md",
         className
       )}
-      onLoad={() => setLoaded(true)}
+      onLoad={() => setIsLoaded(true)}
+      {...props}
     />
   );
-}
+};
 
-export function StaggeredChildren({
-  children,
-  className,
-  staggerDelay = 100,
-}: {
-  children: ReactNode[];
-  className?: string;
-  staggerDelay?: number;
-}) {
+// Blur In animation
+export const BlurIn = ({ children, delay = 0, className }: MotionProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [delay]);
+
   return (
-    <div className={className}>
-      {React.Children.map(children, (child, index) => (
-        <FadeUp key={index} delay={index * staggerDelay}>
-          {child}
-        </FadeUp>
-      ))}
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out",
+        isVisible ? "opacity-100 blur-0" : "opacity-0 blur-md",
+        className
+      )}
+    >
+      {children}
     </div>
   );
-}
+};
