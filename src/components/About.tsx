@@ -1,4 +1,5 @@
 
+import { ArrowRight } from "lucide-react";
 import { FadeUp } from "./ui/Motion";
 
 const About = () => {
