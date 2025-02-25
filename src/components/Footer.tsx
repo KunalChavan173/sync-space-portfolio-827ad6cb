@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-background border-t border-border">
+    <footer className="bg-background border-t border-border/30">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-2">
@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row md:items-center justify-between pt-10 mt-10 border-t border-border">
+        <div className="flex flex-col md:flex-row md:items-center justify-between pt-10 mt-10 border-t border-border/30">
           <p className="text-sm text-muted-foreground">
             © {currentYear} Sync Space Media. All rights reserved.
           </p>

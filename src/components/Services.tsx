@@ -38,7 +38,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-32 bg-secondary/50">
+    <section id="services" className="py-24 md:py-32 bg-secondary/30">
       <div className="container mx-auto px-6 md:px-12">
         <div className="max-w-5xl mx-auto">
           <FadeUp>
@@ -64,12 +64,12 @@ export default function Services() {
             {services.map((service, index) => (
               <FadeUp key={service.title} delay={400 + index * 100}>
                 <div className={cn(
-                  "group p-6 rounded-xl bg-background",
-                  "border border-border/50",
-                  "hover:border-primary/20 hover:shadow-sm",
+                  "group p-6 rounded-xl bg-card shadow-lg",
+                  "border border-border/30",
+                  "hover:border-primary/20",
                   "transition-all duration-300 ease-out"
                 )}>
-                  <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 bg-secondary/50 rounded-lg flex items-center justify-center mb-5">
                     {service.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{service.title}</h3>

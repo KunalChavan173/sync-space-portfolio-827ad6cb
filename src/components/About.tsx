@@ -16,7 +16,7 @@ const About = () => {
                   className="w-full h-auto"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary rounded-2xl -z-10"></div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 rounded-2xl -z-10"></div>
             </div>
           </FadeUp>
 
