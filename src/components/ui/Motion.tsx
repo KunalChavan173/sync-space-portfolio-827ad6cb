@@ -1,6 +1,6 @@
 
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface MotionProps {
   children: ReactNode;
