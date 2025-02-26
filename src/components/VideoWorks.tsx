@@ -4,37 +4,37 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { BlurIn } from "./ui/Motion";
 import { cn } from "@/lib/utils";
 
-// Sample video works data - replace with your actual videos
+// Custom video works data with client videos
 const VIDEO_WORKS = [
   {
     id: 1,
     title: "Brand Story",
     client: "TechVision",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    videoUrl: "/videos/video1.mp4",
   },
   {
     id: 2,
     title: "Product Launch",
     client: "Nexus",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    videoUrl: "/videos/video2.mp4",
   },
   {
     id: 3,
     title: "Corporate Event",
     client: "Elevate",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    videoUrl: "/videos/video3.mp4",
   },
   {
     id: 4,
     title: "Marketing Campaign",
     client: "FutureTech",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+    videoUrl: "/videos/video4.mp4",
   },
   {
     id: 5,
     title: "Social Media Story",
     client: "PulseMedia",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+    videoUrl: "/videos/video5.mp4",
   }
 ];
 
@@ -86,25 +86,38 @@ export default function VideoWorks() {
 
   const handlePrev = () => {
     setActiveIndex(prev => (prev > 0 ? prev - 1 : VIDEO_WORKS.length - 1));
-    scrollToActive(-1);
   };
 
   const handleNext = () => {
     setActiveIndex(prev => (prev < VIDEO_WORKS.length - 1 ? prev + 1 : 0));
-    scrollToActive(1);
   };
 
-  const scrollToActive = (direction: number) => {
+  // Center the active video when it changes
+  useEffect(() => {
     if (!sliderRef.current) return;
     
-    const containerWidth = sliderRef.current.offsetWidth;
-    const scrollAmount = containerWidth * 0.3 * direction;
+    // Get all video elements
+    const videoElements = sliderRef.current.querySelectorAll('.video-item');
+    if (!videoElements.length) return;
     
-    sliderRef.current.scrollBy({
-      left: scrollAmount,
+    // Get the active video element
+    const activeElement = videoElements[activeIndex] as HTMLElement;
+    if (!activeElement) return;
+    
+    // Calculate the center position for the active element
+    const containerWidth = sliderRef.current.offsetWidth;
+    const itemWidth = activeElement.offsetWidth;
+    const itemLeft = activeElement.offsetLeft;
+    
+    // Calculate scroll position to center the active item
+    const scrollLeft = itemLeft - (containerWidth / 2) + (itemWidth / 2);
+    
+    // Scroll to the calculated position
+    sliderRef.current.scrollTo({
+      left: scrollLeft,
       behavior: 'smooth'
     });
-  };
+  }, [activeIndex]);
 
   return (
     <section id="works" ref={sectionRef} className="py-20 bg-background overflow-hidden">
@@ -152,7 +165,7 @@ export default function VideoWorks() {
               <div 
                 key={work.id}
                 className={cn(
-                  "flex-shrink-0 w-[30%] px-4 snap-center transition-all duration-500",
+                  "flex-shrink-0 w-[30%] px-4 snap-center transition-all duration-500 video-item",
                   index === activeIndex ? "scale-100 opacity-100" : "scale-90 opacity-70"
                 )}
               >
