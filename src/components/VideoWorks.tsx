@@ -184,11 +184,11 @@ export default function VideoWorks() {
           </div>
 
           {/* Add custom CSS to hide scrollbar */}
-          <style jsx>{`
-            .hide-scrollbar::-webkit-scrollbar {
+          <style>
+            {`.hide-scrollbar::-webkit-scrollbar {
               display: none;
-            }
-          `}</style>
+            }`}
+          </style>
         </div>
       </div>
     </section>
