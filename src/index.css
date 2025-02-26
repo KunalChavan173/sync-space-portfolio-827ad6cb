@@ -49,8 +49,17 @@
     @apply border-border;
   }
   html, body {
-    @apply bg-background text-foreground cursor-dot;
+    @apply bg-background text-foreground cursor-default;
   }
+  
+  html {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="white" /></svg>') 8 8, auto;
+  }
+  
+  a, button, [role="button"], input, textarea, select, [tabindex]:not([tabindex="-1"]) {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="rgba(255,255,255,0.3)" /></svg>') 12 12, pointer;
+  }
+  
   .perspective-1000 {
     perspective: 1000px;
   }
@@ -83,9 +92,6 @@
   }
   .shadow-glow {
     @apply shadow-[0_0_15px_rgba(109,40,217,0.4)];
-  }
-  .cursor-dot {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="%236D28D9" /></svg>') 4 4, auto;
   }
 }
 

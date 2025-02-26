@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 const NAV_ITEMS = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
+  { label: "Works", href: "#portfolio" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -36,10 +36,10 @@ export default function Header() {
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <a 
           href="#home" 
-          className="relative z-50 text-xl font-mono tracking-tight font-semibold"
-          aria-label="Sync Space Media"
+          className="relative z-50 text-3xl font-sans tracking-tight font-semibold"
+          aria-label="Sync."
         >
-          sync<span className="opacity-40">/</span>space
+          <img src="/lovable-uploads/f7839756-156c-47f9-8b7f-65f43ea80ed5.png" alt="Sync." className="h-9" />
         </a>
 
         {/* Desktop Navigation */}
@@ -48,7 +48,7 @@ export default function Header() {
             <a
               key={item.label}
               href={item.href}
-              className="nav-link text-sm font-medium transition-all duration-200 hover:scale-105"
+              className="text-sm font-medium transition-all duration-200 hover:text-primary hover:scale-105"
             >
               {item.label}
             </a>

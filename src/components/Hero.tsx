@@ -5,7 +5,7 @@ import HeroBackground from "./3d/HeroBackground";
 
 const Hero = () => {
   return (
-    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
+    <section id="home" className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
       <HeroBackground />
       
       <div className="container px-4 mx-auto relative z-10">
